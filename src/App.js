@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
+import {MainPage} from './Main';
 
 class App extends Component {
   render() {
@@ -36,9 +37,9 @@ const Main = () => {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome</h1>
         </header>
-        <p className="App-intro">
-          MAIN PAGE
-        </p>
+        <div>
+          <MainPage />
+        </div>
       </div>
   );
       
