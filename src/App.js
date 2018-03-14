@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
-import './App.css';
-import {MainPage} from './Main';
 
-class App extends Component {
+/* Router */
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Main} from './Main';
+
+
+import {Login} from './Login';
+
+export class App extends Component {
   render() {
+
+    
     return (
       <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/main' component={Main}/>
-      </Switch>
+        <Switch>
+          <Route exact path='/' component={LoginPage}/>
+          <Route exact path='/main' component={MainPage}/>
+        </Switch>
       </BrowserRouter>
     );
   }
 }
-const Home = ()=>{
+
+const LoginPage = ()=>{
+
   return(
+<<<<<<< HEAD
 
         <p className="App-intro">
           LOGIN PAGE
@@ -25,14 +33,22 @@ const Home = ()=>{
 
   );
       
+=======
+      <Login />
+  ); 
+>>>>>>> 4d5d4f825458d1a31f0677618205bd759befa9d6
 }
-const Main = () => {
+
+const MainPage = () => {
   return(
+<<<<<<< HEAD
         <div>
           <MainPage />
         </div>
+=======
+      <Main />
+>>>>>>> 4d5d4f825458d1a31f0677618205bd759befa9d6
   );
-      
 }
 
 export default App;

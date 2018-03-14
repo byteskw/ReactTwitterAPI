@@ -1,7 +1,7 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
+/*import {List, ListItem} from 'material-ui/List';*/
 
-export class MainPage extends React.Component{
+export class Main extends React.Component{
     render(){
         return(
             <div>
@@ -12,7 +12,5 @@ export class MainPage extends React.Component{
         );
     }
 }
-  
 
-
-export default MainPage;
+export default Main;
