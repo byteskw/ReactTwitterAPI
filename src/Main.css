@@ -1,6 +1,6 @@
 .tweetWrapper{
     width:50%;
-    margin-left: 30%;
+    margin-left: 15%;
 }
 .inputWrapper{
     width: 80%;
@@ -9,7 +9,10 @@
     background-color: rgb(30, 211, 235);
 }
 .tweetDetail{
-    
     text-align: center;
     padding-bottom: 20px;
+}
+.menu{
+    width: 15%;
+    position: absolute;
 }
