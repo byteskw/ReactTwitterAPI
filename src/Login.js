@@ -63,7 +63,7 @@ export class Login extends Component{
               />
 
             {this.state.load ? 
-             <div className="App">
+             <div className="App"> <br />
              <ValidatorForm onSubmit={this.handleSubmit} instantValidate = {false} >
                <TextValidator
                  ref="email"

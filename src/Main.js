@@ -16,7 +16,9 @@ export class Main extends React.Component{
         this.state = {
             completed: 0,
             load: false,
+            menu: false
         };
+        this.ShowMenu = this.ShowMenu.bind(this);
     }
 
     componentDidMount() {
@@ -36,22 +38,34 @@ export class Main extends React.Component{
         }
     }
 
+    ShowMenu(){
+        if(this.state.menu === true){
+            this.setState({menu: false});
+        }else{
+            this.setState({menu: true});
+        }
+        
+    }
+
     render(){
         return(
             <MuiThemeProvider>
             <LinearProgress mode="determinate" value={this.state.completed} color="#006064"/>
-            <AppBar
+            <AppBar onClick = {this.ShowMenu}
                 title="Main"
             />
             
+            {this.state.menu ? 
             <div className="menu">
-                <List className="menu-view">
-                    <ListItem primaryText="Beranda"/>
-                    <ListItem primaryText="Notifikasi"/>
-                    <ListItem primaryText="Pesan"/>
-                    <ListItem primaryText="Drafts" />
-                </List>
-            </div>
+            <List className="menu-view">
+                <ListItem primaryText="Beranda"/>
+                <ListItem primaryText="Notifikasi"/>
+                <ListItem primaryText="Pesan"/>
+                <ListItem primaryText="Drafts" />
+            </List>
+        </div>
+        : null}
+            
 
 
             {this.state.load ? 
