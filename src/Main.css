@@ -1,18 +1,28 @@
+
+.menu{
+    width: 14%;
+    position: absolute;
+    margin-top:12px;
+    margin-left: 25px;
+}
 .tweetWrapper{
-    width:50%;
-    margin-left: 15%;
+    width:48%;
+    margin-left: 18%;
+    margin-top:20px;
 }
 .inputWrapper{
     width: 80%;
+    height:115px;
     margin-left: 10%;
     text-align: center;
-    background-color: rgb(30, 211, 235);
+    margin-bottom: 20px;
 }
 .tweetDetail{
     text-align: center;
     padding-bottom: 20px;
 }
-.menu{
-    width: 15%;
-    position: absolute;
+.follow{
+    float:right;
+    margin-right:25px;
+    width:30%;
 }
