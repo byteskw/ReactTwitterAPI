@@ -10,7 +10,7 @@ export class Main extends React.Component{
         return(
             <MuiThemeProvider style={{boxShadow: 'none'}}>
                 <div className="tweetWrapper">
-                <Card containerStyle={{background: '#141d26', color: 'white'}}>
+                <Card containerStyle={{background: 'rgb(23, 125, 209)', color: 'white'}}>
                   <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
                   <CardTitle subtitle="Post your tweet !"/>
                   <div className="inputWrapper">
@@ -18,6 +18,16 @@ export class Main extends React.Component{
                     <CardActions>
                   <RaisedButton type="submit" label="Tweet" primary={true} />
                    </CardActions>
+                   </div>
+                 </Card>
+                 </div>
+                 <div className="tweetWrapper">
+                 <Card>
+                  <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
+                  <div className="tweetDetail">
+                    <p>
+                        INSERT TWEET HERE
+                    </p>
                    </div>
                  </Card>
                  </div>

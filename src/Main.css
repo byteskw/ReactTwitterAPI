@@ -3,6 +3,13 @@
     margin-left: 30%;
 }
 .inputWrapper{
+    width: 80%;
+    margin-left: 10%;
     text-align: center;
-    background-color: #1B3448;
+    background-color: rgb(30, 211, 235);
+}
+.tweetDetail{
+    
+    text-align: center;
+    padding-bottom: 20px;
 }
