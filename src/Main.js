@@ -37,7 +37,7 @@ export class Main extends React.Component{
 
     componentDidMount() {
         this.timer = setTimeout(() => this.progress(35), 100);
-        fetch('https://randomuser.me/api/?results=10')
+        fetch('https://randomuser.me/api/?results=100')
         .then(results => results.json())
         .then(data => {let tweets = data.results.map((item)=>{
             return(
@@ -47,7 +47,7 @@ export class Main extends React.Component{
                     <Divider />
                     <div className="tweetDetail">
                         <p>
-                            View
+                           {item.location.street}
                         </p>
                     </div>
                     </Card>
@@ -105,8 +105,9 @@ export class Main extends React.Component{
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>&nbsp;
                 </form>
+                <a href="#" class="btn btn-danger my-2 my-sm-0">Log Out</a>
             </div>
             </nav>
 
