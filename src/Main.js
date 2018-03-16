@@ -12,8 +12,7 @@ import {Avatar} from './Avatar';
 import {People} from './People';
 //bootstrap & jquery
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import 'jquery/dist/jquery.js';
+import 'jquery/dist/jquery.min.js';
 
 const styles = {
     example: {
@@ -86,25 +85,30 @@ export class Main extends React.Component{
     render(){
         return(
             <MuiThemeProvider>
-            <AppBar onClick = {this.ShowMenu} 
-                title="Main"
-                style={{position:"fixed",top:"0"}}
-                
-            />
-           {this.state.menu ? 
-                 <div className="menu">
-                    <Card>
-                        <List>
-                            <ListItem primaryText="Beranda"/>
-                            <Divider />
-                            <ListItem primaryText="Notifikasi"/>
-                            <Divider />
-                            <ListItem primaryText="Pesan"/>
-                            <Divider />
-                            <ListItem primaryText="Drafts" />
-                        </List>
-                    </Card>
-                 </div> : null}
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <a class="navbar-brand text-light" href="#">TWIT</a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                    <a class="nav-link text-light" href="#">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Notifikasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Pesan</a>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            </nav>
 
             {this.state.load ? 
                 <div>

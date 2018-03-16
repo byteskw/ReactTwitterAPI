@@ -13,6 +13,10 @@ import CircularProgress from 'material-ui/CircularProgress';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.js';
 
+//router
+import {Link} from 'react-router-dom';
+
+
 export class Login extends Component{
     constructor(props){
         super(props);
@@ -34,10 +38,15 @@ export class Login extends Component{
       this.setState({formData});
     }
   
-    handleSubmit(){
+    handleSubmit(e){
       this.setState({submitted: true}, () =>{
         setTimeout(() => this.setState({submitted:false}), 3000);
       })
+      this.setState(
+        {
+          [e.target.name]: e.target.value
+        }
+      )
     }
 
     componentDidMount() {
@@ -68,7 +77,7 @@ export class Login extends Component{
 
             {this.state.load ? 
              <div className="App"> <br />
-             <ValidatorForm onSubmit={this.handleSubmit} instantValidate = {false} >
+             <ValidatorForm onClick={this.handleSubmit} >
                <TextValidator
                  ref="email"
                  floatingLabelFixed = "email"
@@ -92,7 +101,7 @@ export class Login extends Component{
                  hintText = "Enter Your Password"
                /><br />
    
-               <RaisedButton 
+               <RaisedButton
                  type="submit"
                  label={(!submitted && 'Submit') || (submitted && 'your form is submmitted!')}
                  primary={true}
