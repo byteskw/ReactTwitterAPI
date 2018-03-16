@@ -113,6 +113,9 @@ export class Main extends React.Component{
             {this.state.load ? 
                 <div>
                   <Avatar />
+                  <div className="followWrapper">
+                        <People />
+                    </div>
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
@@ -124,9 +127,7 @@ export class Main extends React.Component{
                     </Card>
                  </div>
                  {this.state.tweets}
-                 <div>
-                        <People />
-                    </div>
+                 
              </div> : 
                   <center> 
                      <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 
