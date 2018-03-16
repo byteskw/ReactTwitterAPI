@@ -7,7 +7,19 @@ import './Main.css';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
-import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
+
+//bootstrap & jquery
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import 'jquery/dist/jquery.js';
+
+const styles = {
+    example: {
+        position: "fixed",
+        top:0
+    }
+};
 
 export class Main extends React.Component{
     constructor(props){
@@ -24,7 +36,7 @@ export class Main extends React.Component{
     }
 
     componentDidMount() {
-        this.timer = setTimeout(() => this.progress(35), 200);
+        this.timer = setTimeout(() => this.progress(35), 100);
         fetch('https://randomuser.me/api/?results=10')
         .then(results => results.json())
         .then(data => {let tweets = data.results.map((item)=>{
@@ -56,7 +68,7 @@ export class Main extends React.Component{
         }else{
             this.setState({completed});
             const diff = Math.random() * 10;
-            this.timer = setTimeout(() => this.progress(completed + diff), 200);
+            this.timer = setTimeout(() => this.progress(completed + diff), 100);
         }
     }
 
@@ -72,31 +84,28 @@ export class Main extends React.Component{
     render(){
         return(
             <MuiThemeProvider>
-            <LinearProgress mode="determinate" value={this.state.completed} color="#006064"/>
-            <AppBar onClick = {this.ShowMenu}
+            <AppBar onClick = {this.ShowMenu} 
                 title="Main"
+                style={{position:"fixed",top:"0"}}
+                
             />
-            
-            {this.state.menu ? 
-            <div className="menu">
-                <Card>
-            <List className="menu-view">
-                <ListItem primaryText="Beranda"/>
-                <Divider />
-                <ListItem primaryText="Notifikasi"/>
-                <Divider />
-                <ListItem primaryText="Pesan"/>
-                <Divider />
-                <ListItem primaryText="Drafts" />
-            </List>
-            </Card>
-        </div>
-        : null}
-            
-
+           
 
             {this.state.load ? 
             <div>
+                 <div className="menu">
+                    <Card>
+                        <List>
+                            <ListItem primaryText="Beranda"/>
+                            <Divider />
+                            <ListItem primaryText="Notifikasi"/>
+                            <Divider />
+                            <ListItem primaryText="Pesan"/>
+                            <Divider />
+                            <ListItem primaryText="Drafts" />
+                        </List>
+                    </Card>
+                 </div>
               <div className="follow">
                     <Card style={{paddingBottom: '70px'}}>
                     <CardHeader style={{float:'left'}} title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
@@ -118,7 +127,11 @@ export class Main extends React.Component{
                     </Card>
                  </div>
                  {this.state.tweets}
-             </div> : null}
+             </div> : 
+                  <center> 
+                     <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 
+                  </center>
+                }
             </MuiThemeProvider>
         );
     }

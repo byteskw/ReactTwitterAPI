@@ -6,7 +6,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
+
+
+//bootstrap & jquery
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'jquery/dist/jquery.js';
 
 export class Login extends Component{
     constructor(props){
@@ -31,12 +36,12 @@ export class Login extends Component{
   
     handleSubmit(){
       this.setState({submitted: true}, () =>{
-        setTimeout(() => this.setState({submitted:false}), 5000);
+        setTimeout(() => this.setState({submitted:false}), 3000);
       })
     }
 
     componentDidMount() {
-      this.timer = setTimeout(() => this.progress(35), 200);
+      this.timer = setTimeout(() => this.progress(50), 100);
     }
     componentWillMount(){
       clearTimeout(this.timer);
@@ -49,7 +54,7 @@ export class Login extends Component{
       }else{
           this.setState({completed});
           const diff = Math.random() * 10;
-          this.timer = setTimeout(() => this.progress(completed + diff), 200);
+          this.timer = setTimeout(() => this.progress(completed + diff), 100);
       }
   }
 
@@ -57,7 +62,6 @@ export class Login extends Component{
         const {formData, submitted} = this.state;
         return(
             <MuiThemeProvider>
-              <LinearProgress mode="determinate" value={this.state.completed} color="#006064"/>
               <AppBar
                 title="Login"
               />
@@ -95,7 +99,11 @@ export class Login extends Component{
                 />
              </ValidatorForm>
            </div>
-           : null}
+           : 
+            <center> 
+              <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 
+            </center>
+           }
           </MuiThemeProvider>
         );
     }
