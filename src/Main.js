@@ -89,10 +89,7 @@ export class Main extends React.Component{
                 style={{position:"fixed",top:"0"}}
                 
             />
-           
-
-            {this.state.load ? 
-            <div>
+           {this.state.menu ? 
                  <div className="menu">
                     <Card>
                         <List>
@@ -105,7 +102,10 @@ export class Main extends React.Component{
                             <ListItem primaryText="Drafts" />
                         </List>
                     </Card>
-                 </div>
+                 </div> : null}
+
+            {this.state.load ? 
+                <div>
               <div className="follow">
                     <Card style={{paddingBottom: '70px'}}>
                     <CardHeader style={{float:'left'}} title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
