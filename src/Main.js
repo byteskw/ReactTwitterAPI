@@ -18,6 +18,7 @@ export class Main extends React.Component{
             load: false,
             menu: false,
             tweets: [],
+            avatar: [],
         };
         this.ShowMenu = this.ShowMenu.bind(this);
     }
@@ -39,7 +40,7 @@ export class Main extends React.Component{
                     </Card>
                  </div>
             );
-        })
+        });
         this.setState({
             tweets: tweets,
         });
@@ -104,7 +105,7 @@ export class Main extends React.Component{
                     </CardActions>
                     </Card>
                  </div>
-            
+                {this.state.avatar}
                 <div className="tweetWrapper">
                     <Card>
                     <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
