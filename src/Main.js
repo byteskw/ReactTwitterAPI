@@ -16,13 +16,34 @@ export class Main extends React.Component{
         this.state = {
             completed: 0,
             load: false,
-            menu: false
+            menu: false,
+            tweets: [],
         };
         this.ShowMenu = this.ShowMenu.bind(this);
     }
 
     componentDidMount() {
         this.timer = setTimeout(() => this.progress(35), 200);
+        fetch('https://randomuser.me/api/?results=10')
+        .then(results => results.json())
+        .then(data => {let tweets = data.results.map((item)=>{
+            return(
+                <div key={item.results} className="tweetWrapper">
+                    <Card>
+                    <CardHeader title={item.name.first} subtitle={item.email} avatar={item.picture.medium} />
+                    <div className="tweetDetail">
+                        <p>
+                            View
+                        </p>
+                    </div>
+                    </Card>
+                 </div>
+            );
+        })
+        this.setState({
+            tweets: tweets,
+        });
+    })
       }
     componentWillMount(){
         clearTimeout(this.timer);
@@ -95,16 +116,7 @@ export class Main extends React.Component{
                     </div>
                     </Card>
                  </div>
-                 <div className="tweetWrapper">
-                    <Card>
-                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
-                    <div className="tweetDetail">
-                        <p>
-                            View
-                        </p>
-                    </div>
-                    </Card>
-                 </div>
+                 {this.state.tweets}
              </div> : null}
             </MuiThemeProvider>
         );
