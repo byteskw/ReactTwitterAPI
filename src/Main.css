@@ -1,4 +1,7 @@
-
+.avatarWrapper{
+    float: left;
+    width: 17%;
+}
 .menu{
     width: 14%;
     margin-top:-2px;
@@ -7,12 +10,12 @@
     width:200px;
 }
 .tweetWrapper{
-    width:48%;
+    width:49%;
     margin-left: 18%;
     margin-top:6%;
 }
 .tweetListWrapper{
-    width:48%;
+    width:49%;
     margin-left: 18%;
     margin-top:2%;
 }
