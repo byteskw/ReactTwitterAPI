@@ -57,12 +57,17 @@ export class Main extends React.Component{
             
             {this.state.menu ? 
             <div className="menu">
+                <Card>
             <List className="menu-view">
                 <ListItem primaryText="Beranda"/>
+                <Divider />
                 <ListItem primaryText="Notifikasi"/>
+                <Divider />
                 <ListItem primaryText="Pesan"/>
+                <Divider />
                 <ListItem primaryText="Drafts" />
             </List>
+            </Card>
         </div>
         : null}
             
@@ -71,13 +76,11 @@ export class Main extends React.Component{
             {this.state.load ? 
             <div>
               <div className="follow">
-                    <Card>
-                    <CardHeader title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
-                    <div className="tweetDetail">
-                        <p>
-                            Follow Us
-                        </p>
-                    </div>
+                    <Card style={{paddingBottom: '70px'}}>
+                    <CardHeader style={{float:'left'}} title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
+                    <CardActions style={{float:'right', marginTop:'12px'}}>
+                            <RaisedButton type="submit" label="Follow" primary={true} />
+                    </CardActions>
                     </Card>
                  </div>
             
@@ -85,14 +88,13 @@ export class Main extends React.Component{
                     <Card>
                     <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
                     <div className="inputWrapper">
-                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowsMax={10}/>
-                        <CardActions>
+                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowsMax={10} fullWidth={true}/>
+                        <CardActions style={{float:'right'}}>
                             <RaisedButton type="submit" label="Tweet" primary={true} />
                         </CardActions>
                     </div>
                     </Card>
                  </div>
-                
                  <div className="tweetWrapper">
                     <Card>
                     <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
