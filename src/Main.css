@@ -1,4 +1,8 @@
-
+.avatarWrapper{
+    float: left;
+    width: 16%;
+    margin-left: 1%;
+}
 .menu{
     width: 14%;
     margin-top:-2px;
@@ -7,28 +11,45 @@
     width:200px;
 }
 .tweetWrapper{
-    width:48%;
+    width:49%;
     margin-left: 18%;
-    margin-top:6%;
+    margin-top:3%;
+}
+.tweetListWrapper{
+    width:49%;
+    margin-left: 18%;
+    margin-top:2%;
+    height: auto;
 }
 .inputWrapper{
-    width: 80%;
-    height:115px;
-    margin-left: 10%;
-    text-align: center;
-    margin-bottom: -25px;
+    width: 100%;
+    padding: 30px;
+    height:auto;
+    display: inline-flex;
 }
 .tweetDetail{
     text-align: center;
-    padding-bottom: 20px;
+    height: auto;
     margin-top:2%;
-    margin-bottom: -30px;
 }
 .follow{
+    margin-top: 2%;
+}
+.peopleDetail{
+    display: inline-flex;
+}
+.followWrapper{
+    margin-top: -7px;
     float:right;
-    margin-right:25px;
+    margin-right:2%;    
     width:30%;
+}
+.headerWrapper{
+    max-width: 240px;
 }
 .circular-prog{
     padding-top:10%;
+}
+.navfloat{
+    float:right;
 }
