@@ -7,7 +7,19 @@ import './Main.css';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
-import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
+
+//bootstrap & jquery
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import 'jquery/dist/jquery.js';
+
+const styles = {
+    example: {
+        position: "fixed",
+        top:0
+    }
+};
 
 export class Main extends React.Component{
     constructor(props){
@@ -16,13 +28,13 @@ export class Main extends React.Component{
         this.state = {
             completed: 0,
             load: false,
-            menu: true
+            menu: false
         };
         this.ShowMenu = this.ShowMenu.bind(this);
     }
 
     componentDidMount() {
-        this.timer = setTimeout(() => this.progress(35), 200);
+        this.timer = setTimeout(() => this.progress(5), 100);
       }
     componentWillMount(){
         clearTimeout(this.timer);
@@ -34,7 +46,7 @@ export class Main extends React.Component{
         }else{
             this.setState({completed});
             const diff = Math.random() * 10;
-            this.timer = setTimeout(() => this.progress(completed + diff), 200);
+            this.timer = setTimeout(() => this.progress(completed + diff), 100);
         }
     }
 
@@ -50,31 +62,33 @@ export class Main extends React.Component{
     render(){
         return(
             <MuiThemeProvider>
-            <LinearProgress mode="determinate" value={this.state.completed} color="#006064"/>
-            <AppBar onClick = {this.ShowMenu}
+            <AppBar onClick = {this.ShowMenu} 
                 title="Main"
+                
             />
-            {this.state.menu ? 
-            <div className="menu">
-            <List className="menu-view">
-                <ListItem primaryText="Beranda"/>
-                <ListItem primaryText="Notifikasi"/>
-                <ListItem primaryText="Pesan"/>
-                <ListItem primaryText="Drafts" />
-            </List>
-          </div>
-        : null}
-            
+           
+
             {this.state.load ? 
             <div>
-              <div className="follow">
+                 <div className="menu">
                     <Card>
-                    <CardHeader title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
-                    <div className="tweetDetail">
-                        <p>
-                            Follow Us
-                        </p>
-                    </div>
+                        <List>
+                            <ListItem primaryText="Beranda"/>
+                            <Divider />
+                            <ListItem primaryText="Notifikasi"/>
+                            <Divider />
+                            <ListItem primaryText="Pesan"/>
+                            <Divider />
+                            <ListItem primaryText="Drafts" />
+                        </List>
+                    </Card>
+                 </div>
+              <div className="follow">
+                    <Card style={{paddingBottom: '70px'}}>
+                    <CardHeader style={{float:'left'}} title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
+                    <CardActions style={{float:'right', marginTop:'12px'}}>
+                            <RaisedButton type="submit" label="Follow" primary={true} />
+                    </CardActions>
                     </Card>
                  </div>
             
@@ -82,25 +96,63 @@ export class Main extends React.Component{
                     <Card>
                     <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
                     <div className="inputWrapper">
-                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowsMax={10}/>
-                        <CardActions>
+                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowsMax={10} fullWidth={true}/>
+                        <CardActions style={{float:'right'}}>
                             <RaisedButton type="submit" label="Tweet" primary={true} />
                         </CardActions>
                     </div>
                     </Card>
                  </div>
-                
                  <div className="tweetWrapper">
                     <Card>
                     <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
                     <div className="tweetDetail">
                         <p>
                             View
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        </p>
+                    </div>
+                    </Card>
+                    
+                    <Card>
+                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
+                    <div className="tweetDetail">
+                        <p>
+                            View
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        </p>
+                    </div>
+                    </Card>
+                    <Card>
+                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
+                    <div className="tweetDetail">
+                        <p>
+                            View
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
                         </p>
                     </div>
                     </Card>
                  </div>
-             </div> : null}
+             </div> :   
+             <center> 
+                <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 
+             </center>
+            }
             </MuiThemeProvider>
         );
     }

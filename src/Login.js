@@ -8,6 +8,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import LinearProgress from 'material-ui/LinearProgress';
 
+//bootstrap & jquery
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'jquery/dist/jquery.js';
+
 export class Login extends Component{
     constructor(props){
         super(props);
@@ -36,7 +40,7 @@ export class Login extends Component{
     }
 
     componentDidMount() {
-      this.timer = setTimeout(() => this.progress(35), 200);
+      this.timer = setTimeout(() => this.progress(35), 150);
     }
     componentWillMount(){
       clearTimeout(this.timer);
@@ -49,7 +53,7 @@ export class Login extends Component{
       }else{
           this.setState({completed});
           const diff = Math.random() * 10;
-          this.timer = setTimeout(() => this.progress(completed + diff), 200);
+          this.timer = setTimeout(() => this.progress(completed + diff), 150);
       }
   }
 
