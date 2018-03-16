@@ -9,6 +9,7 @@ import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import CircularProgress from 'material-ui/CircularProgress';
 import {Avatar} from './Avatar';
+import {People} from './People';
 //bootstrap & jquery
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -44,6 +45,7 @@ export class Main extends React.Component{
                 <div key={item.results} className="tweetListWrapper">
                     <Card>
                     <CardHeader title={item.name.first} subtitle={item.login.username} avatar={item.picture.medium} />
+                    <Divider />
                     <div className="tweetDetail">
                         <p>
                             View
@@ -106,15 +108,10 @@ export class Main extends React.Component{
 
             {this.state.load ? 
                 <div>
-              <div className="follow">
-                    <Card style={{paddingBottom: '70px'}}>
-                    <CardHeader style={{float:'left'}} title="Untuk Diikuti" subtitle="Lihat Semua" avatar="" />
-                    <CardActions style={{float:'right', marginTop:'12px'}}>
-                            <RaisedButton type="submit" label="Follow" primary={true} />
-                    </CardActions>
-                    </Card>
-                 </div>
-                <Avatar />
+                  <Avatar />
+                  <div className="followWrapper">
+                        <People />
+                </div>
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
@@ -125,7 +122,9 @@ export class Main extends React.Component{
                     </div>
                     </Card>
                  </div>
+                 
                  {this.state.tweets}
+                 
              </div> : 
                   <center> 
                      <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 

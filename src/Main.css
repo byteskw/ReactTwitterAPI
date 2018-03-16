@@ -1,6 +1,7 @@
 .avatarWrapper{
     float: left;
-    width: 17%;
+    width: 16%;
+    margin-left: 1%;
 }
 .menu{
     width: 14%;
@@ -18,6 +19,7 @@
     width:49%;
     margin-left: 18%;
     margin-top:2%;
+    height: auto;
 }
 .inputWrapper{
     width: 100%;
@@ -27,13 +29,23 @@
 }
 .tweetDetail{
     text-align: center;
-    padding-bottom: 20px;
+    height: auto;
     margin-top:2%;
 }
 .follow{
+    margin-top: 2%;
+}
+.peopleDetail{
+    display: inline-flex;
+}
+.followWrapper{
+    margin-top: -7px;
     float:right;
-    margin-right:25px;
+    margin-right:2%;    
     width:30%;
+}
+.headerWrapper{
+    max-width: 240px;
 }
 .circular-prog{
     padding-top:10%;
