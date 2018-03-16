@@ -28,13 +28,34 @@ export class Main extends React.Component{
         this.state = {
             completed: 0,
             load: false,
-            menu: false
+            menu: false,
+            tweets: [],
         };
         this.ShowMenu = this.ShowMenu.bind(this);
     }
 
     componentDidMount() {
-        this.timer = setTimeout(() => this.progress(5), 100);
+        this.timer = setTimeout(() => this.progress(35), 100);
+        fetch('https://randomuser.me/api/?results=10')
+        .then(results => results.json())
+        .then(data => {let tweets = data.results.map((item)=>{
+            return(
+                <div key={item.results} className="tweetWrapper">
+                    <Card>
+                    <CardHeader title={item.name.first} subtitle={item.email} avatar={item.picture.medium} />
+                    <div className="tweetDetail">
+                        <p>
+                            View
+                        </p>
+                    </div>
+                    </Card>
+                 </div>
+            );
+        })
+        this.setState({
+            tweets: tweets,
+        });
+    })
       }
     componentWillMount(){
         clearTimeout(this.timer);
@@ -64,6 +85,7 @@ export class Main extends React.Component{
             <MuiThemeProvider>
             <AppBar onClick = {this.ShowMenu} 
                 title="Main"
+                style={{position:"fixed",top:"0"}}
                 
             />
            
@@ -103,56 +125,12 @@ export class Main extends React.Component{
                     </div>
                     </Card>
                  </div>
-                 <div className="tweetWrapper">
-                    <Card>
-                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
-                    <div className="tweetDetail">
-                        <p>
-                            View
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        </p>
-                    </div>
-                    </Card>
-                    
-                    <Card>
-                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
-                    <div className="tweetDetail">
-                        <p>
-                            View
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        </p>
-                    </div>
-                    </Card>
-                    <Card>
-                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
-                    <div className="tweetDetail">
-                        <p>
-                            View
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        </p>
-                    </div>
-                    </Card>
-                 </div>
-             </div> :   
-             <center> 
-                <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 
-             </center>
-            }
+                 {this.state.tweets}
+             </div> : 
+                  <center> 
+                     <CircularProgress size={100} thickness={5} className="circular-prog" value={this.state.completed} /> 
+                  </center>
+                }
             </MuiThemeProvider>
         );
     }
