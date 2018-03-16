@@ -16,7 +16,7 @@ export class Main extends React.Component{
         this.state = {
             completed: 0,
             load: false,
-            menu: false
+            menu: true
         };
         this.ShowMenu = this.ShowMenu.bind(this);
     }
@@ -54,7 +54,6 @@ export class Main extends React.Component{
             <AppBar onClick = {this.ShowMenu}
                 title="Main"
             />
-            
             {this.state.menu ? 
             <div className="menu">
             <List className="menu-view">
@@ -63,11 +62,9 @@ export class Main extends React.Component{
                 <ListItem primaryText="Pesan"/>
                 <ListItem primaryText="Drafts" />
             </List>
-        </div>
+          </div>
         : null}
             
-
-
             {this.state.load ? 
             <div>
               <div className="follow">
