@@ -8,7 +8,7 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import CircularProgress from 'material-ui/CircularProgress';
-
+import {Avatar} from './Avatar';
 //bootstrap & jquery
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -41,9 +41,9 @@ export class Main extends React.Component{
         .then(results => results.json())
         .then(data => {let tweets = data.results.map((item)=>{
             return(
-                <div key={item.results} className="tweetWrapper">
+                <div key={item.results} className="tweetListWrapper">
                     <Card>
-                    <CardHeader title={item.name.first} subtitle={item.email} avatar={item.picture.medium} />
+                    <CardHeader title={item.name.first} subtitle={item.login.username} avatar={item.picture.medium} />
                     <div className="tweetDetail">
                         <p>
                             View
@@ -114,13 +114,12 @@ export class Main extends React.Component{
                     </CardActions>
                     </Card>
                  </div>
-                {this.state.avatar}
+                <Avatar />
                 <div className="tweetWrapper">
                     <Card>
-                    <CardHeader title="InsertNameHere" subtitle="InsertSubTitleHere" avatar="" />
                     <div className="inputWrapper">
-                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowsMax={10} fullWidth={true}/>
-                        <CardActions style={{float:'right'}}>
+                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowMax={2} fullWidth={true}/>
+                        <CardActions style={{}}>
                             <RaisedButton type="submit" label="Tweet" primary={true} />
                         </CardActions>
                     </div>
