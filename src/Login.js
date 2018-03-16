@@ -13,38 +13,57 @@ import CircularProgress from 'material-ui/CircularProgress';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.js';
 
+//router
+import {Link} from 'react-router-dom';
+
+
+//  
+import AuthService from './AuthService';
+
+
 export class Login extends Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
           formData: {
-            email: '',
-            password: '',
             completed: 0,
             load: false,
           },
-          submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.Auth = new AuthService();
       }
     handleChange(event){
-      const {formData} = this.state;
-      formData[event.target.name] = event.target.value;
-      this.setState({formData});
+      this.setState(
+        {
+          [event.target.name]: event.target.value
+        }
+      )
     }
   
-    handleSubmit(){
-      this.setState({submitted: true}, () =>{
-        setTimeout(() => this.setState({submitted:false}), 3000);
+    handleSubmit(e){
+      e.preventDefault();
+
+      this.Auth.login(this.state.username, this.state.password)
+      .then(res =>{
+          this.props.history.replace('/main');
       })
+      .catch(err => {
+        alert(err);
+      })
+
     }
 
     componentDidMount() {
       this.timer = setTimeout(() => this.progress(50), 100);
     }
     componentWillMount(){
+      if(this.Auth.loggedIn())
+       this.props.history.replace('/main');
+
       clearTimeout(this.timer);
+
     } 
 
       
@@ -68,16 +87,13 @@ export class Login extends Component{
 
             {this.state.load ? 
              <div className="App"> <br />
-             <ValidatorForm onSubmit={this.handleSubmit} instantValidate = {false} >
+             <ValidatorForm onSubmit={this.handleSubmit}>
                <TextValidator
-                 ref="email"
-                 floatingLabelFixed = "email"
+                 ref="username"
+                 floatingLabelFixed = "username"
                  onChange={this.handleChange}
-                 name="email"
-                 value={formData.email}
-                 validators={['required', 'isEmail']}
-                 errorMessages={['this field is required','email is not valid']}
-                 hintText = "Enter Your Email"
+                 name="username"
+                 hintText = "Enter Your username"
                /><br />
    
                <TextValidator
@@ -85,16 +101,13 @@ export class Login extends Component{
                  ref="password"
                  onChange = {this.handleChange}
                  name="password"
-                 value={formData.password}
                  floatingLabelFixed = "password"
-                 validators={['required','minStringLength:5']}
-                 errorMessages={['this field is required','password min 5 character']}
                  hintText = "Enter Your Password"
                /><br />
    
-               <RaisedButton 
+               <RaisedButton
                  type="submit"
-                 label={(!submitted && 'Submit') || (submitted && 'your form is submmitted!')}
+                 label="Log In"
                  primary={true}
                 />
              </ValidatorForm>
