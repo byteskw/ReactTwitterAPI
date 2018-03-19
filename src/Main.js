@@ -37,7 +37,7 @@ export class Main extends React.Component{
 
     componentDidMount() {
         this.timer = setTimeout(() => this.progress(35), 100);
-        fetch('https://randomuser.me/api/?results=100')
+        fetch('https://randomuser.me/api/?results=10')
         .then(results => results.json())
         .then(data => {let tweets = data.results.map((item)=>{
             return(
@@ -62,7 +62,7 @@ export class Main extends React.Component{
     componentWillMount(){
         clearTimeout(this.timer);
     }
-
+    
     progress(completed){
         if(completed > 100){
             this.setState({completed: 100, load: true});

@@ -15,48 +15,67 @@ import 'jquery/dist/jquery.js';
 
 //router
 import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router';
 
 
 export class Login extends Component{
     constructor(props){
         super(props);
         this.state = {
-          formData: {
-            email: '',
+            accessToken: '',
+            username: '',
             password: '',
             completed: 0,
             load: false,
-          },
-          submitted: false
+            isLog : false,
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangePass = this.handleChangePass.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
-    handleChange(event){
-      const {formData} = this.state;
-      formData[event.target.name] = event.target.value;
-      this.setState({formData});
+    handleChangeName(event){
+        this.setState({
+            username: event.target.value,
+        });
     }
+    handleChangePass(event){
+      this.setState({
+          password: event.target.value,
+      });
+  }
   
     handleSubmit(e){
       this.setState({submitted: true}, () =>{
         setTimeout(() => this.setState({submitted:false}), 3000);
       })
-      this.setState(
-        {
-          [e.target.name]: e.target.value
-        }
-      )
-    }
+      alert(this.state.username);
+      alert(this.state.password);
+      alert(this.state.isLog);
+      }
+      
 
     componentDidMount() {
       this.timer = setTimeout(() => this.progress(50), 100);
+      if(this.state.username=='john'&&this.state.password=='123456'){
+        fetch('https://test-mobile.neo-fusion.com/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            'username': 'john',
+            'password': '123456',
+      })
+    })
+    .then(response => {response.json().then(data=>{this.setState({accessToken: JSON.stringify(data).substring(17, 53),isLog: true})})})
+    
+        }else{
+          this.setState({isLog: false});
+        }
     }
     componentWillMount(){
       clearTimeout(this.timer);
     } 
-
-      
     progress(completed){
       if(completed > 100){
           this.setState({completed: 100, load: true});
@@ -68,8 +87,8 @@ export class Login extends Component{
   }
 
     render(){
-        const {formData, submitted} = this.state;
         return(
+          {this.state.isLog? null : null}
             <MuiThemeProvider>
               <AppBar
                 title="Login"
@@ -77,35 +96,33 @@ export class Login extends Component{
 
             {this.state.load ? 
              <div className="App"> <br />
-             <ValidatorForm onClick={this.handleSubmit} >
+             <ValidatorForm onSubmit={this.handleSubmit} >
                <TextValidator
-                 ref="email"
-                 floatingLabelFixed = "email"
-                 onChange={this.handleChange}
-                 name="email"
-                 value={formData.email}
-                 validators={['required', 'isEmail']}
-                 errorMessages={['this field is required','email is not valid']}
-                 hintText = "Enter Your Email"
+                 ref="username"
+                 onChange={this.handleChangeName}
+                 name="username"
+                 value={this.state.username}
+                 validators={['required']}
+                 errorMessages={['this field is required','username is not valid']}
+                 hintText = "Enter Your Username"
                /><br />
    
                <TextValidator
                  type="password"
                  ref="password"
-                 onChange = {this.handleChange}
+                 onChange = {this.handleChangePass}
                  name="password"
-                 value={formData.password}
-                 floatingLabelFixed = "password"
+                 value={this.state.password}
                  validators={['required','minStringLength:5']}
                  errorMessages={['this field is required','password min 5 character']}
                  hintText = "Enter Your Password"
                /><br />
-   
-               <RaisedButton
+                <RaisedButton
                  type="submit"
-                 label={(!submitted && 'Submit') || (submitted && 'your form is submmitted!')}
                  primary={true}
-                />
+                 href='localhost:3000'
+                 label="Sign In" />
+               
              </ValidatorForm>
            </div>
            : 
