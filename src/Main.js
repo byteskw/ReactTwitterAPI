@@ -112,6 +112,10 @@ export class Main extends React.Component{
         }*/
         return token && token.length > 10;
     }
+    isLogout(){
+        localStorage.removeItem('access');
+        return <Redirect to ={{pathname: '/'}} />
+    }
   
 
     render(){
@@ -144,7 +148,9 @@ export class Main extends React.Component{
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                 <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>&nbsp;
                 </form>
-                <a href="#" class="btn btn-danger my-2 my-sm-0">Log Out</a>
+                <form onSubmit={this.isLogout}>
+                    <button class="btn btn-danger my-2 my-sm-0" >Log Out</button>
+                </form>
             </div>
             </nav>
                 )}

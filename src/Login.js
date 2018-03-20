@@ -68,9 +68,9 @@ export class Login extends Component{
       console.error(error);
     });
 
-    alert(this.state.username);
-      alert(this.state.password);
-      alert(localStorage.getItem('access'));
+      //alert(this.state.username);
+      //alert(this.state.password);
+      //alert(localStorage.getItem('access'));
     }
 
     componentDidMount() {
