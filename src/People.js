@@ -16,7 +16,7 @@ export class People extends React.Component{
         .then(results => results.json())
         .then(data => {let people = data.results.map((item)=>{
             return(
-                <div className="follow">
+                <div key={item.results} className="follow">
                     <Card>
                     <div className="peopleDetail">
                     <div className="headerWrapper">

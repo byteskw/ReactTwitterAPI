@@ -47,7 +47,19 @@ export class Login extends Component{
   
     handleSubmit(){
       if(this.state.username=='john'&&this.state.password=='123456'){
-        fetch('https://test-mobile.neo-fusion.com/auth/login', {
+        
+        this.setState({
+                isLoggedIn: true
+              });
+            }
+    alert(this.state.username);
+      alert(this.state.password);
+      alert(localStorage.getItem('access'));
+    }
+
+    componentDidMount() {
+      this.timer = setTimeout(() => this.progress(50), 100);
+      fetch('https://test-mobile.neo-fusion.com/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -57,18 +69,12 @@ export class Login extends Component{
             'password': '123456',
       })
       
-    }).then(response => response.json()).then(data => {alert(JSON.stringify(data).substring(17,53))})
-        this.setState({
-                isLoggedIn: true
-              });
-      }
-      
-    alert(this.state.username);
-      alert(this.state.password);
-    }
-
-    componentDidMount() {
-      this.timer = setTimeout(() => this.progress(50), 100);
+    }).then((response) => response.json())
+    .then((data) => {localStorage.setItem('access', JSON.stringify(data).substring(17,53))})
+    .catch((error) => {
+      console.error(error);
+    });
+    
     }
     componentWillMount(){
       clearTimeout(this.timer);
