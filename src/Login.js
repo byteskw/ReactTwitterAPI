@@ -94,17 +94,31 @@ export class Login extends Component{
          
             <MuiThemeProvider>
               {this.state.isLoggedIn ? <Redirect to={{pathname: '/main'}}/> : <div>
-              <AppBar
-                title="Login"
-              />
+              <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <a class="navbar-brand text-light" href="#">TWIT</a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                    <a class="nav-link text-light" href="#">Beranda</a>
+                </li>
+                </ul>
+            </div>
+            </nav>
         
             {this.state.load ? 
-             <div className="App"> <br />
+             <div className="App container"> <br />
              <form onSubmit={this.handleSubmit}>
-                <input name="username" value={this.state.username} onChange={this.handleChangeName} className="noteTitle" type="text" placeholder="Insert Username.." required/><br /><br />
-                <input name="password" value={this.state.password} onChange={this.handleChangePass} className="noteTitle" type="password" placeholder="Insert Password.." required/><br /><br />
-                <input className="signIn" type="submit" value="Sign In"/>
-            </form>
+             <div class="form-group">
+                <input name="username" value={this.state.username} onChange={this.handleChangeName} className="form-control" type="text" placeholder="Insert Username.." required/><br /><br />
+                <input name="password" value={this.state.password} onChange={this.handleChangePass} className="form-control" type="password" placeholder="Insert Password.." required/><br /><br />
+
+                <input className="btn btn-outline-primary" type="submit" value="Sign In"/>
+              </div>
+             </form>
            </div>
            : 
             <center> 
