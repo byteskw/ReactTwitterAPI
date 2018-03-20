@@ -47,7 +47,6 @@ export class Login extends Component{
   
     handleSubmit(){
       if(this.state.username=='john'&&this.state.password=='123456'){
-        
         this.setState({
                 isLoggedIn: true
               });
@@ -74,7 +73,6 @@ export class Login extends Component{
     .catch((error) => {
       console.error(error);
     });
-    
     }
     componentWillMount(){
       clearTimeout(this.timer);

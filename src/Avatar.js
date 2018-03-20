@@ -10,29 +10,16 @@ export class Avatar extends React.Component{
             avatar: [],
         };
     }
-    componentDidMount() {
-        fetch('https://randomuser.me/api/?results=1')
-        .then(results => results.json())
-        .then(data => {let avatar = data.results.map((item)=>{
-            return(
-                <div key={item.results} className="avatarWrapper">
-                    <Card>
-                    <div className="avatar">
-                    <CardHeader avatar={item.picture.medium} title={item.name.first} subtitle={item.login.username}/>
-                    </div>
-                    </Card>
-                 </div>
-            );
-        });
-        this.setState({
-            avatar: avatar,
-        });
-    })
-      }
     render(){
         return(
             <div>
-                {this.state.avatar}
+            <div className="avatarWrapper">
+                    <Card>
+                    <div className="avatar">
+                    <CardHeader avatar="http://fanaru.com/random/image/thumb/160391-random-seriously-face-avatar.jpg" title="John" subtitle="john"/>
+                    </div>
+                    </Card>
+                 </div>
             </div>
         );
     }

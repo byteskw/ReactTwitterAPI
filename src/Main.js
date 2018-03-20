@@ -37,17 +37,24 @@ export class Main extends React.Component{
 
     componentDidMount() {
         this.timer = setTimeout(() => this.progress(35), 100);
-        fetch('https://randomuser.me/api/?results=10')
+        fetch('https://test-mobile.neo-fusion.com/data', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Token': localStorage.getItem('access'),
+            }
+      })
         .then(results => results.json())
-        .then(data => {let tweets = data.results.map((item)=>{
+        .then(data => {let tweets = data.map((item)=>{
             return(
-                <div key={item.results} className="tweetListWrapper">
+                <div key={item.id} className="tweetListWrapper">
                     <Card>
-                    <CardHeader title={item.name.first} subtitle={item.login.username} avatar={item.picture.medium} />
+                    <CardHeader title="John" subtitle="john" avatar="http://fanaru.com/random/image/thumb/160391-random-seriously-face-avatar.jpg" />
                     <Divider />
                     <div className="tweetDetail">
+                        <img src={item.thumbnail_url}/>
                         <p>
-                           {item.location.street}
+                           {item.summary}
                         </p>
                     </div>
                     </Card>
@@ -59,10 +66,25 @@ export class Main extends React.Component{
         });
     })
       }
+
     componentWillMount(){
         clearTimeout(this.timer);
     }
     
+    handleSubmit(){
+        
+        fetch('https://test-mobile.neo-fusion.com/data/create', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'multipart/formdata',
+              'Access-Token': localStorage.getItem('access'),
+            },
+            body:{
+
+            }
+      })
+    }
+
     progress(completed){
         if(completed > 100){
             this.setState({completed: 100, load: true});
