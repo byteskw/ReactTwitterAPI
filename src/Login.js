@@ -57,8 +57,7 @@ export class Login extends Component{
             'password': '123456',
       })
       
-    })
-    .then(response => {response.json().then(data=>{this.setState({accessToken: JSON.stringify(data).substring(17, 53)})})})
+    }).then(response => response.json()).then(data => {alert(JSON.stringify(data).substring(17,53))})
         this.setState({
                 isLoggedIn: true
               });
