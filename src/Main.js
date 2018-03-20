@@ -14,6 +14,8 @@ import {People} from './People';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 
+import {Redirect} from 'react-router-dom';
+
 const styles = {
     example: {
         position: "fixed",
@@ -101,12 +103,25 @@ export class Main extends React.Component{
         }else{
             this.setState({menu: true});
         }
-        
     }
 
+    isAuthenticated() {
+        const token =  localStorage.getItem('access');
+        /*if(token && token.length > 10 ){
+            return true;
+        }*/
+        return token && token.length > 10;
+    }
+  
+
     render(){
+        const isAlreadyAuthenticated = this.isAuthenticated();
         return(
             <MuiThemeProvider>
+              {!isAlreadyAuthenticated ?
+              <Redirect to ={{pathname: '/'}} /> :  (
+              
+           
             <nav class="navbar navbar-expand-lg navbar-light bg-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -132,6 +147,7 @@ export class Main extends React.Component{
                 <a href="#" class="btn btn-danger my-2 my-sm-0">Log Out</a>
             </div>
             </nav>
+                )}
 
             {this.state.load ? 
                 <div>

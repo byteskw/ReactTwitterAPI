@@ -51,14 +51,8 @@ export class Login extends Component{
                 isLoggedIn: true
               });
             }
-    alert(this.state.username);
-      alert(this.state.password);
-      alert(localStorage.getItem('access'));
-    }
 
-    componentDidMount() {
-      this.timer = setTimeout(() => this.progress(50), 100);
-      fetch('https://test-mobile.neo-fusion.com/auth/login', {
+            fetch('https://test-mobile.neo-fusion.com/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -73,6 +67,15 @@ export class Login extends Component{
     .catch((error) => {
       console.error(error);
     });
+
+    alert(this.state.username);
+      alert(this.state.password);
+      alert(localStorage.getItem('access'));
+    }
+
+    componentDidMount() {
+      this.timer = setTimeout(() => this.progress(50), 100);
+
     }
     componentWillMount(){
       clearTimeout(this.timer);
@@ -89,11 +92,28 @@ export class Login extends Component{
       }
   }
 
+    isAuthenticated() {
+      const token =  localStorage.getItem('access');
+      /*if(token && token.length > 10 ){
+          return true;
+      }*/
+      return token && token.length > 10;
+  }
+
+
+
     render(){
+      const isAlreadyAuthenticated = this.isAuthenticated();
         return(
-         
             <MuiThemeProvider>
-              {this.state.isLoggedIn ? <Redirect to={{pathname: '/main'}}/> : <div>
+              {isAlreadyAuthenticated ?
+              <Redirect to ={{pathname: '/main'}} /> :  (
+              <Redirect to ={{pathname: '/'}} />
+               )}
+              {this.state.isLoggedIn ? <Redirect to ={{pathname: '/main'}} />
+
+                :
+              <div>
               <nav class="navbar navbar-expand-lg navbar-light bg-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
