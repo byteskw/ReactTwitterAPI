@@ -32,6 +32,7 @@ export class Login extends Component{
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangePass = this.handleChangePass.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.progress = this.progress.bind(this);
       }
     handleChangeName(event){
         this.setState({
@@ -75,7 +76,7 @@ export class Login extends Component{
 
     componentDidMount() {
       this.timer = setTimeout(() => this.progress(50), 100);
-
+      
     }
     componentWillMount(){
       clearTimeout(this.timer);

@@ -69,8 +69,8 @@ export class Main extends React.Component{
             tweets: tweets,
         });
     }).catch((error) => {
-      console.error(error);
-    });
+        console.error(error);
+      });
       }
 
     componentWillMount(){
@@ -82,8 +82,8 @@ export class Main extends React.Component{
     onChangeTweet(e){
         this.setState({tweet: e.target.value});
     }
-    handleSubmit(){
-        let form = new FormData(this.refs.myForm);
+    handleSubmit(event){
+        let form = new FormData();
         form.append('myImage', this.state.file);
         fetch('https://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
@@ -92,7 +92,12 @@ export class Main extends React.Component{
               'Access-Token': localStorage.getItem('access'),
             },
             body: form
-      })
+      }).then((response) => response.json())
+      .then((data)=> {})
+      .catch((error) => {
+        console.error(error);
+      });
+
     }
     
 
