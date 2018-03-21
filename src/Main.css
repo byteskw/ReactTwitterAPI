@@ -50,7 +50,10 @@
 .circular-prog{
     padding-top:10%;
 }
-.navfloat{
-    float:right;
+.form-group{
+    height:auto;
+    width:680px;
 }
-  
+.btntwit{
+    margin-left:310px;
+}

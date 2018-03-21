@@ -199,13 +199,13 @@ export class Main extends React.Component{
                             <div class="form-group">
                                 <label for="comment">Write Something</label>
                                 <textarea 
-                                    class="form-control" rows="5" id="comment" name="tweetText" 
-                                    value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="190">
+                                    className="form-control txtarea" rows="4" id="comment" name="tweetText" 
+                                    value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="303">
                                 </textarea>
                             </div>
                             <input type="file" name="file" onChange={this.onChangeFile}/>
                             
-                            <button type="submit" class="btn btn-primary">Tweet</button>
+                            <button type="submit" class="btn btn-primary btntwit">TWIT</button>
                         </form>
                     </div>
                     </Card>
