@@ -36,7 +36,6 @@ export class Main extends React.Component{
             tweet: '',
         };
         this.ShowMenu = this.ShowMenu.bind(this);
-        this.onChangeFile = this.onChangeFile.bind(this);
         this.onChangeTweet = this.onChangeTweet.bind(this);
     }
     componentDidMount() {
@@ -76,25 +75,28 @@ export class Main extends React.Component{
     componentWillMount(){
         clearTimeout(this.timer);
     }
-    onChangeFile(e) {
-        this.setState({file:e.target.files[0]})
-      }
+    
     onChangeTweet(e){
         this.setState({tweet: e.target.value});
     }
-    handleSubmit(event){
+
+    handleSubmit(e){
+        let image = document.getElementById("profilePictures").files[0];
         let form = new FormData();
-        form.append('myImage', this.state.file);
-        fetch('https://test-mobile.neo-fusion.com/data/create', {
+        form.append("file", image);
+        console.log(localStorage.getItem('access'));
+        console.log( form.get('file'));
+        fetch('http://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'multipart/form-data',
               'Access-Token': localStorage.getItem('access'),
             },
             body: form
       }).then((response) => response.json())
       .then((data)=> {
-          data.map((item)=>{
+          console.log(data);
+          /*data.map((item)=>{
             fetch('https://test-mobile.neo-fusion.com/data/'+item.id+'/update', {
                 method: 'POST',
                 headers: {
@@ -106,12 +108,13 @@ export class Main extends React.Component{
                     'detail': this.state.tweet,
               })
           })
-      })
-      .catch((error) => {
+        })*/
+    }).catch((error) => {
         console.error(error);
       });
 
-    })}
+        e.preventDefault();
+    }
     
 
     progress(completed){
@@ -191,9 +194,9 @@ export class Main extends React.Component{
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
-                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data">
+                        <form name="myForm" method="POST" onSubmit={(e) => this.handleSubmit(e)}encType="multipart/form-data">
                             <input type="text" name="tweetText" value={this.state.tweet} onChange={this.onChangeTweet}/>
-                            <input type="file" name="upload" onChange={this.onChangeFile}/>
+                            <input type="file" id="profilePictures" name="file"/>
                             <button type="submit">Tweet</button>
                         </form>
                     </div>

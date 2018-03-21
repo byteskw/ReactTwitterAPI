@@ -14,9 +14,9 @@ export class People extends React.Component{
     componentDidMount() {
         fetch('https://randomuser.me/api/?results=5')
         .then(results => results.json())
-        .then(data => {let people = data.results.map((item)=>{
+        .then(data => {let people = data.results.map((item, index)=>{
             return(
-                <div key={item.results} className="follow">
+                <div key={index} className="follow">
                     <Card>
                     <div className="peopleDetail">
                     <div className="headerWrapper">
