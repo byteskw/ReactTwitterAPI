@@ -30,11 +30,13 @@ export class Main extends React.Component{
             load: false,
             menu: false,
             tweets: [],
-            avatar: [],
+            file:null,
+            tweet: '',
         };
         this.ShowMenu = this.ShowMenu.bind(this);
+        this.onChangeFile = this.onChangeFile.bind(this);
+        this.onChangeTweet = this.onChangeTweet.bind(this);
     }
-
     componentDidMount() {
         this.timer = setTimeout(() => this.progress(35), 100);
         fetch('https://test-mobile.neo-fusion.com/data', {
@@ -70,20 +72,25 @@ export class Main extends React.Component{
     componentWillMount(){
         clearTimeout(this.timer);
     }
-    
+    onChangeFile(e) {
+        this.setState({file:e.target.files[0]})
+      }
+    onChangeTweet(e){
+        this.setState({tweet: e.target.value});
+    }
     handleSubmit(){
-        
+        let form = new FormData(this.refs.myForm);
+        form.append('myImage', this.state.file);
         fetch('https://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'multipart/formdata',
+              'Content-Type': 'undefined',
               'Access-Token': localStorage.getItem('access'),
             },
-            body:{
-
-            }
+            body: form
       })
     }
+    
 
     progress(completed){
         if(completed > 100){
@@ -142,10 +149,11 @@ export class Main extends React.Component{
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
-                        <TextField hintText="What's Happening ?" multiLine={true} rows={1} rowMax={2} fullWidth={true}/>
-                        <CardActions style={{}}>
-                            <RaisedButton type="submit" label="Tweet" primary={true} />
-                        </CardActions>
+                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data">
+                            <input type="text" name="tweetText" value={this.state.tweet} onChange={this.onChangeTweet}/>
+                            <input type="file" name="upload" onChange={this.onChangeFile}/>
+                            <button type="submit">Tweet</button>
+                        </form>
                     </div>
                     </Card>
                  </div>
