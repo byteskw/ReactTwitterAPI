@@ -16,6 +16,9 @@ import 'jquery/dist/jquery.min.js';
 
 import {Redirect} from 'react-router-dom';
 
+import Dropzone from 'react-dropzone'
+import DropzoneComponent from 'react-dropzone-component';
+
 const styles = {
     example: {
         position: "fixed",
@@ -84,7 +87,7 @@ export class Main extends React.Component{
     }
     handleSubmit(event){
         let form = new FormData();
-        form.append('myImage', this.state.file);
+        form.append('file', this.state.file);
         fetch('https://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
@@ -143,6 +146,7 @@ export class Main extends React.Component{
         localStorage.removeItem('access');
         return <Redirect to ={{pathname: '/'}} />
     }
+    
   
 
     render(){
@@ -191,10 +195,17 @@ export class Main extends React.Component{
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
-                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data">
-                            <input type="text" name="tweetText" value={this.state.tweet} onChange={this.onChangeTweet}/>
-                            <input type="file" name="upload" onChange={this.onChangeFile}/>
-                            <button type="submit">Tweet</button>
+                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data" >
+                            <div class="form-group">
+                                <label for="comment">Write Something</label>
+                                <textarea 
+                                    class="form-control" rows="5" id="comment" name="tweetText" 
+                                    value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="190">
+                                </textarea>
+                            </div>
+                            <input type="file" name="file" onChange={this.onChangeFile}/>
+                            
+                            <button type="submit" class="btn btn-primary">Tweet</button>
                         </form>
                     </div>
                     </Card>
