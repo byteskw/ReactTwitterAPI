@@ -88,17 +88,30 @@ export class Main extends React.Component{
         fetch('https://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'undefined',
+              'Content-Type': 'application/json',
               'Access-Token': localStorage.getItem('access'),
             },
             body: form
       }).then((response) => response.json())
-      .then((data)=> {})
+      .then((data)=> {
+          data.map((item)=>{
+            fetch('https://test-mobile.neo-fusion.com/data/'+item.id+'/update', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Token': localStorage.getItem('access'),
+                },
+                body: JSON.stringify({
+                    'summary': this.state.tweet,
+                    'detail': this.state.tweet,
+              })
+          })
+      })
       .catch((error) => {
         console.error(error);
       });
 
-    }
+    })}
     
 
     progress(completed){
