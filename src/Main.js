@@ -68,7 +68,9 @@ export class Main extends React.Component{
         this.setState({
             tweets: tweets,
         });
-    })
+    }).catch((error) => {
+      console.error(error);
+    });
       }
 
     componentWillMount(){
