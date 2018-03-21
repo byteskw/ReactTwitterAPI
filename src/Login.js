@@ -132,9 +132,9 @@ export class Login extends Component{
             {this.state.load ? 
              <div className="App container"> <br />
              <form onSubmit={this.handleSubmit}>
-             <div class="form-group">
-                <input name="username" value={this.state.username} onChange={this.handleChangeName} className="form-control" type="text" placeholder="Insert Username.." required/><br /><br />
-                <input name="password" value={this.state.password} onChange={this.handleChangePass} className="form-control" type="password" placeholder="Insert Password.." required/><br /><br />
+             <div className="formGroup">
+                <input name="username" value={this.state.username} onChange={this.handleChangeName} className="formControl" type="text" placeholder="Insert Username.." required/><br /><br />
+                <input name="password" value={this.state.password} onChange={this.handleChangePass} className="formControl" type="password" placeholder="Insert Password.." required/><br /><br />
 
                 <input className="btn btn-outline-primary" type="submit" value="Sign In"/>
               </div>
