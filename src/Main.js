@@ -38,8 +38,7 @@ export class Main extends React.Component{
         this.ShowMenu = this.ShowMenu.bind(this);
         this.onChangeTweet = this.onChangeTweet.bind(this);
     }
-    componentDidMount() {
-        this.timer = setTimeout(() => this.progress(35), 100);
+    getTweets(){
         fetch('https://test-mobile.neo-fusion.com/data', {
             method: 'GET',
             headers: {
@@ -70,6 +69,10 @@ export class Main extends React.Component{
     }).catch((error) => {
         console.error(error);
       });
+    }
+    componentDidMount() {
+        this.timer = setTimeout(() => this.progress(35), 100);
+        this.getTweets();
       }
 
     componentWillMount(){
@@ -89,15 +92,14 @@ export class Main extends React.Component{
         fetch('http://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'multipart/form-data',
               'Access-Token': localStorage.getItem('access'),
             },
             body: form
       }).then((response) => response.json())
       .then((data)=> {
           console.log(data);
-          /*data.map((item)=>{
-            fetch('https://test-mobile.neo-fusion.com/data/'+item.id+'/update', {
+          
+            fetch('https://test-mobile.neo-fusion.com/data/'+data.id+'/update', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -107,8 +109,9 @@ export class Main extends React.Component{
                     'summary': this.state.tweet,
                     'detail': this.state.tweet,
               })
-          })
-        })*/
+          }).then(response => response.json()).then((data =>{
+              this.getTweets();
+          }))
     }).catch((error) => {
         console.error(error);
       });
