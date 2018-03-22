@@ -47,7 +47,6 @@ export class Main extends React.Component{
         fetch('https://test-mobile.neo-fusion.com/data', {
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json',
               'Access-Token': localStorage.getItem('access'),
             }
       })
@@ -87,34 +86,21 @@ export class Main extends React.Component{
     }
     handleSubmit(event){
         let form = new FormData();
-        form.append('file', this.state.file);
+        form.append('file', document.getElementById('file').files[0]);
+        console.log(form.get('file'));
         fetch('https://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
               'Access-Token': localStorage.getItem('access'),
             },
             body: form
       }).then((response) => response.json())
       .then((data)=> {
-          data.map((item)=>{
-            fetch('https://test-mobile.neo-fusion.com/data/'+item.id+'/update', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Token': localStorage.getItem('access'),
-                },
-                body: JSON.stringify({
-                    'summary': this.state.tweet,
-                    'detail': this.state.tweet,
-              })
-          })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+          
+    })
 
-    })}
+    event.preventDefault();
+}
     
 
     progress(completed){
@@ -203,7 +189,7 @@ export class Main extends React.Component{
                                     value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="303">
                                 </textarea>
                             </div>
-                            <input type="file" name="file" onChange={this.onChangeFile}/>
+                            <input type="file" id="file" name="file" onChange={this.onChangeFile}/>
                             
                             <button type="submit" className="btn btn-primary btntwit">TWIT</button>
                         </form>
