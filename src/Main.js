@@ -16,9 +16,6 @@ import 'jquery/dist/jquery.min.js';
 
 import {Redirect} from 'react-router-dom';
 
-import Dropzone from 'react-dropzone'
-import DropzoneComponent from 'react-dropzone-component';
-
 const styles = {
     example: {
         position: "fixed",
@@ -201,17 +198,10 @@ export class Main extends React.Component{
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
-                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data" >
-                            <div className="form-group">
-                                <label for="comment">Write Something</label>
-                                <textarea 
-                                    className="form-control txtarea" rows="4" id="comment" name="tweetText" 
-                                    value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="303">
-                                </textarea>
-                            </div>
-                            <input type="file" name="file" onChange={this.onChangeFile}/>
-                            
-                            <button type="submit" className="btn btn-primary btntwit">TWIT</button>
+                        <form name="myForm" method="POST" onSubmit={(e) => this.handleSubmit(e)}encType="multipart/form-data">
+                            <input type="text" name="tweetText" value={this.state.tweet} onChange={this.onChangeTweet}/>
+                            <input type="file" id="profilePictures" name="file"/>
+                            <button type="submit">Tweet</button>
                         </form>
                     </div>
                     </Card>
