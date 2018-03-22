@@ -16,6 +16,9 @@ import 'jquery/dist/jquery.min.js';
 
 import {Redirect} from 'react-router-dom';
 
+import Dropzone from 'react-dropzone'
+import DropzoneComponent from 'react-dropzone-component';
+
 const styles = {
     example: {
         position: "fixed",
@@ -149,6 +152,7 @@ export class Main extends React.Component{
         localStorage.removeItem('access');
         return <Redirect to ={{pathname: '/'}} />
     }
+    
   
 
     render(){
@@ -159,30 +163,30 @@ export class Main extends React.Component{
               <Redirect to ={{pathname: '/'}} /> :  (
               
            
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+            <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-            <a class="navbar-brand text-light" href="#">TWIT</a>
+            <a className="navbar-brand text-light" href="#">TWIT</a>
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item ">
-                    <a class="nav-link text-light" href="#">Beranda</a>
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li className="nav-item ">
+                    <a className="nav-link text-light" href="#">Beranda</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Notifikasi</a>
+                <li className="nav-item">
+                    <a className="nav-link text-light" href="#">Notifikasi</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Pesan</a>
+                <li className="nav-item">
+                    <a className="nav-link text-light" href="#">Pesan</a>
                 </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>&nbsp;
+                <form className="form-inline my-2 my-lg-0">
+                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <button className="btn btn-success my-2 my-sm-0" type="submit">Search</button>&nbsp;
                 </form>
                 <form onSubmit={this.isLogout}>
-                    <button class="btn btn-danger my-2 my-sm-0" >Log Out</button>
+                    <button className="btn btn-danger my-2 my-sm-0" >Log Out</button>
                 </form>
             </div>
             </nav>
@@ -197,10 +201,17 @@ export class Main extends React.Component{
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
-                        <form name="myForm" method="POST" onSubmit={(e) => this.handleSubmit(e)}encType="multipart/form-data">
-                            <input type="text" name="tweetText" value={this.state.tweet} onChange={this.onChangeTweet}/>
-                            <input type="file" id="profilePictures" name="file"/>
-                            <button type="submit">Tweet</button>
+                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data" >
+                            <div className="form-group">
+                                <label for="comment">Write Something</label>
+                                <textarea 
+                                    className="form-control txtarea" rows="4" id="comment" name="tweetText" 
+                                    value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="303">
+                                </textarea>
+                            </div>
+                            <input type="file" name="file" onChange={this.onChangeFile}/>
+                            
+                            <button type="submit" className="btn btn-primary btntwit">TWIT</button>
                         </form>
                     </div>
                     </Card>
