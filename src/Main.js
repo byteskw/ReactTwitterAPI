@@ -16,9 +16,6 @@ import 'jquery/dist/jquery.min.js';
 
 import {Redirect} from 'react-router-dom';
 
-import Dropzone from 'react-dropzone'
-import DropzoneComponent from 'react-dropzone-component';
-
 const styles = {
     example: {
         position: "fixed",
@@ -35,15 +32,14 @@ export class Main extends React.Component{
             load: false,
             menu: false,
             tweets: [],
-            file:null,
+            file:"null",
             tweet: '',
         };
         this.ShowMenu = this.ShowMenu.bind(this);
-        this.onChangeFile = this.onChangeFile.bind(this);
         this.onChangeTweet = this.onChangeTweet.bind(this);
     }
-    componentDidMount() {
-        this.timer = setTimeout(() => this.progress(35), 100);
+
+    getTweets(){
         fetch('https://test-mobile.neo-fusion.com/data', {
             method: 'GET',
             headers: {
@@ -73,22 +69,30 @@ export class Main extends React.Component{
     }).catch((error) => {
         console.error(error);
       });
+      this.setState(({tweet: ""}));
+    }
+
+
+    componentDidMount() {
+        this.timer = setTimeout(() => this.progress(35), 100);
+        this.getTweets();
       }
 
     componentWillMount(){
         clearTimeout(this.timer);
     }
-    onChangeFile(e) {
-        this.setState({file:e.target.files[0]})
-      }
+    
     onChangeTweet(e){
         this.setState({tweet: e.target.value});
     }
-    handleSubmit(event){
+
+    handleSubmit(e){
+        let image = document.getElementById("profilePictures").files[0];
         let form = new FormData();
-        form.append('file', document.getElementById('file').files[0]);
-        console.log(form.get('file'));
-        fetch('https://test-mobile.neo-fusion.com/data/create', {
+        form.append("file", image);
+        console.log(localStorage.getItem('access'));
+        console.log( form.get('file'));
+        fetch('http://test-mobile.neo-fusion.com/data/create', {
             method: 'POST',
             headers: {
               'Access-Token': localStorage.getItem('access'),
@@ -96,11 +100,27 @@ export class Main extends React.Component{
             body: form
       }).then((response) => response.json())
       .then((data)=> {
+          console.log(data);
           
-    })
+            fetch('https://test-mobile.neo-fusion.com/data/'+data.id+'/update', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Token': localStorage.getItem('access'),
+                },
+                body: JSON.stringify({
+                    'summary': this.state.tweet,
+                    'detail': this.state.tweet,
+              })
+          }).then(response => response.json()).then((data =>{
+              this.getTweets();
+          }))
+    }).catch((error) => {
+        console.error(error);
+      });
 
-    event.preventDefault();
-}
+        e.preventDefault();
+    }
     
 
     progress(completed){
@@ -133,8 +153,6 @@ export class Main extends React.Component{
         return <Redirect to ={{pathname: '/'}} />
     }
     
-  
-
     render(){
         const isAlreadyAuthenticated = this.isAuthenticated();
         return(
@@ -181,17 +199,18 @@ export class Main extends React.Component{
                 <div className="tweetWrapper">
                     <Card>
                     <div className="inputWrapper">
-                        <form ref="myForm" onSubmit={this.handleSubmit} encType="multipart/form-data" >
-                            <div className="form-group">
+                        <form name="myForm" method="POST" onSubmit={(e) => this.handleSubmit(e)}encType="multipart/form-data">
+
+                             <div className="form-group">
                                 <label for="comment">Write Something</label>
                                 <textarea 
                                     className="form-control txtarea" rows="4" id="comment" name="tweetText" 
                                     value={this.state.tweet} onChange={this.onChangeTweet} required maxlength="303">
                                 </textarea>
                             </div>
-                            <input type="file" id="file" name="file" onChange={this.onChangeFile}/>
-                            
-                            <button type="submit" className="btn btn-primary btntwit">TWIT</button>
+
+                            <input type="file" id="profilePictures" name="file" ref="file" />
+                            <button type="submit" id="clear">Tweet</button>
                         </form>
                     </div>
                     </Card>
